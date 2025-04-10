@@ -1,0 +1,38 @@
+{
+	"Name": "Nekos Better Elite Titans",
+	"Description": "Make Elite Titans Easier Harder Or Tune By Player Count Also Fixes Elite Titans",
+	"Version": "1.0.0",
+	"LoadPriority": 20,
+	"RequiredOnClient": false,
+	"Scripts": [
+		{
+			"Path": "elite_titan_player_count.nut",
+			"RunOn": "SERVER",
+			"ServerCallback": {
+				"Before": "EliteTitanPlayerCount_Init"
+			}
+		}
+	],
+	"ConVars": [
+		{
+			"Name": "elite_titan_easier",
+			"DefaultValue": "0"
+		},
+		{
+			"Name": "elite_titan_harder",
+			"DefaultValue": "0"
+		},
+		{
+			"Name": "elite_titan_player_count",
+			"DefaultValue": "1"
+		},
+		{
+			"Name": "elite_titan_player_count_easier",
+			"DefaultValue": "6"
+		},
+		{
+			"Name": "elite_titan_player_count_harder",
+			"DefaultValue": "12"
+		}
+	]
+}

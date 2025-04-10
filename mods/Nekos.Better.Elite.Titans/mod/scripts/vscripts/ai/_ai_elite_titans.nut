@@ -67,7 +67,7 @@ void function EliteTitanExecutionCheck( entity ent, var damageInfo )
 					ent.SetNoTarget( true ) //Prevents other nearby AI Titans from Moshing the victim
 				}
 				else if ( GetConVarInt( "elite_titan_easier" ) == 0 )
-					thread EliteExecutionDelayed( attacker, ent, damageInfo ) //Execute in next frame
+					thread EliteExecutionDelayed( attacker, ent ) //Execute in next frame
 			}
 		}
 	}
@@ -131,7 +131,7 @@ titanhealthdamaged = 1
 ent.SetHealth( titanhealthdamaged )
 }
 
-void function EliteExecutionDelayed( entity attacker, entity ent, var damageInfo )
+void function EliteExecutionDelayed( entity attacker, entity ent )
 {
 	Assert( IsValid( attacker ) && attacker.IsTitan(), "Executioner is not an Elite Titan: " + attacker )
 	attacker.EndSignal( "OnDestroy" )
@@ -150,8 +150,6 @@ void function EliteExecutionDelayed( entity attacker, entity ent, var damageInfo
 		if( GetDoomedState( ent ) && ( !SoulHasPassive( soul, ePassives.PAS_RONIN_AUTOSHIFT ) || !SoulHasPassive( soul, ePassives.PAS_AUTO_EJECT ) || !ent.IsPhaseShifted() ) )
 		{
 			vector attackerStartingAngles = attacker.GetAngles()
-			thread EliteTitanExecution_DamageEnemy( ent, damageInfo )
-			DamageInfo_SetDamage( damageInfo, 0 )
 			thread EliteTitanExecution_Wait( attacker, attackerStartingAngles, attacker.IsInvulnerable() )
 			thread PlayerTriesSyncedMelee( attacker, ent )
 			ent.SetNoTarget( true ) //Prevents other nearby AI Titans from Moshing the victim

@@ -63,16 +63,8 @@ void function EliteTitanExecutionCheck( entity ent, var damageInfo )
 				    thread EliteTitanExecution_DamageEnemy( ent, damageInfo )
 					DamageInfo_SetDamage( damageInfo, 0 )
 					thread EliteTitanExecution_Wait( attacker, attackerStartingAngles, attacker.IsInvulnerable() )
+					thread PlayerTriesSyncedMelee( attacker, ent )
 					ent.SetNoTarget( true ) //Prevents other nearby AI Titans from Moshing the victim
-					if ( GetConVarInt( "elite_titan_harder" ) != 0 && GetTitanCharacterName( attacker ) == "vanguard" )
-					GivePassive( attacker.GetTitanSoul(), ePassives.PAS_VANGUARD_COREMETER )
-					waitthread PlayerTriesSyncedMelee( attacker, ent )
-					if ( !IsValid( attacker ) )
-					return
-					if ( !IsAlive( attacker ) )
-					return
-					if( SoulHasPassive( attacker.GetTitanSoul(), ePassives.PAS_VANGUARD_COREMETER ) )
-					TakePassive( attacker.GetTitanSoul(), ePassives.PAS_VANGUARD_COREMETER )
 				}
 				else if ( GetConVarInt( "elite_titan_easier" ) == 0 )
 					thread EliteExecutionDelayed( attacker, ent, damageInfo ) //Execute in next frame
@@ -161,16 +153,8 @@ void function EliteExecutionDelayed( entity attacker, entity ent, var damageInfo
 			thread EliteTitanExecution_DamageEnemy( ent, damageInfo )
 			DamageInfo_SetDamage( damageInfo, 0 )
 			thread EliteTitanExecution_Wait( attacker, attackerStartingAngles, attacker.IsInvulnerable() )
+			thread PlayerTriesSyncedMelee( attacker, ent )
 			ent.SetNoTarget( true ) //Prevents other nearby AI Titans from Moshing the victim
-			if ( GetConVarInt( "elite_titan_harder" ) != 0 && GetTitanCharacterName( attacker ) == "vanguard" )
-			GivePassive( attacker.GetTitanSoul(), ePassives.PAS_VANGUARD_COREMETER )
-			waitthread PlayerTriesSyncedMelee( attacker, ent )
-			if ( !IsValid( attacker ) )
-			return
-			if ( !IsAlive( attacker ) )
-			return
-			if( SoulHasPassive( attacker.GetTitanSoul(), ePassives.PAS_VANGUARD_COREMETER ) )
-			TakePassive( attacker.GetTitanSoul(), ePassives.PAS_VANGUARD_COREMETER )
 		}
 	}
 }

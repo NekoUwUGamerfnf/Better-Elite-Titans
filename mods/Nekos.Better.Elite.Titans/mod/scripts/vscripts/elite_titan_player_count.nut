@@ -19,13 +19,13 @@ void function PlayerCheckLoop_thread()
    return
    if ( GetConVarInt( "elite_titan_player_count" ) != 0 )
    {
-   if ( GetConVarInt( "elite_titan_easier" ) == 0 && GetPlayerArray().len() <= 6 )
+   if ( GetConVarInt( "elite_titan_easier" ) == 0 && GetPlayerArray().len() <= GetConVarInt( "elite_titan_player_count_easier" ) )
    SetConVarInt( "elite_titan_easier", 1 )
-   if ( GetConVarInt( "elite_titan_easier" ) != 0 && GetPlayerArray().len() > 6 )
+   if ( GetConVarInt( "elite_titan_easier" ) != 0 && GetPlayerArray().len() > GetConVarInt( "elite_titan_player_count_easier" ) )
    SetConVarInt( "elite_titan_easier", 0 )
-   if ( GetConVarInt( "elite_titan_harder" ) == 0 && GetPlayerArray().len() >= 12 )
+   if ( GetConVarInt( "elite_titan_harder" ) == 0 && GetPlayerArray().len() >= GetConVarInt( "elite_titan_player_count_harder" ) )
    SetConVarInt( "elite_titan_harder", 1 )
-   if ( GetConVarInt( "elite_titan_harder" ) != 0 && GetPlayerArray().len() < 12 )
+   if ( GetConVarInt( "elite_titan_harder" ) != 0 && GetPlayerArray().len() < GetConVarInt( "elite_titan_player_count_harder" ) )
    SetConVarInt( "elite_titan_harder", 0 )
    }
   }

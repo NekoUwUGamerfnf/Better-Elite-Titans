@@ -25,14 +25,6 @@
 		{
 			"Name": "elite_titan_player_count",
 			"DefaultValue": "1"
-		},
-		{
-			"Name": "elite_titan_player_count_easier",
-			"DefaultValue": "6"
-		},
-		{
-			"Name": "elite_titan_player_count_harder",
-			"DefaultValue": "12"
 		}
 	]
 }

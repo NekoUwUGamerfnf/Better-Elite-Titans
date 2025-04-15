@@ -60,7 +60,6 @@ void function EliteTitanExecutionCheck( entity ent, var damageInfo )
 				if( GetDoomedState( ent ) && ( !SoulHasPassive( soul, ePassives.PAS_AUTO_EJECT ) || !ent.IsPhaseShifted() ) )
 				{
 				    vector attackerStartingAngles = attacker.GetAngles()
-				    thread EliteTitanExecution_DamageEnemy( ent, damageInfo )
 					DamageInfo_SetDamage( damageInfo, 0 )
 					thread EliteTitanExecution_Wait( attacker, attackerStartingAngles, attacker.IsInvulnerable() )
 					thread PlayerTriesSyncedMelee( attacker, ent )
@@ -105,30 +104,6 @@ if( godmode == true )
  attacker.SetAngles( angles )
  }
 }
-}
-
-void function EliteTitanExecution_DamageEnemy( entity ent, var damageInfo )
-{
-entity soul = ent.GetTitanSoul()
-if( !IsValid( soul ) )
-return
-int damage = int( DamageInfo_GetDamage( damageInfo ) )
-int shieldhealth = soul.GetShieldHealth()
-int titanhealth = ent.GetHealth()
-int shieldhealthdamaged = shieldhealth - damage
-int shieldhealthdamagedunchanged = shieldhealthdamaged
-if( shieldhealthdamaged < 0 )
-shieldhealthdamaged = 0
-soul.SetShieldHealth( shieldhealthdamaged )
-int newdamage = damage - shieldhealthdamagedunchanged
-if( newdamage < 0 )
-newdamage = 0
-if( newdamage > damage )
-newdamage = damage
-int titanhealthdamaged = titanhealth - newdamage
-if( titanhealthdamaged <= 0 )
-titanhealthdamaged = 1
-ent.SetHealth( titanhealthdamaged )
 }
 
 void function EliteExecutionDelayed( entity attacker, entity ent )

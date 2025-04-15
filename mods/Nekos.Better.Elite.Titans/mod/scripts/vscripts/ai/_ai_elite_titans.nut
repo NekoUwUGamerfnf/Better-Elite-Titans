@@ -109,11 +109,6 @@ if( godmode == true )
 
 void function EliteTitanExecution_DamageEnemy( entity ent, var damageInfo )
 {
-WaitFrame()
-if( !IsValid( ent ) )
-return
-if( !IsAlive( ent ) )
-return
 entity soul = ent.GetTitanSoul()
 if( !IsValid( soul ) )
 return
